@@ -1,0 +1,19 @@
+.body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  color: #FFFFFF;
+  min-width: 320px;
+  max-width: 1280px;
+  padding: 0 auto;
+  margin: 0 auto;
+  background-color: #000000;
+}
+
+div, p, h1, h2, h3, ul, li, a {    
+  outline: 1px red dashed;
+  }
