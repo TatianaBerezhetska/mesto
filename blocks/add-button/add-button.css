@@ -1,6 +1,6 @@
 .add-button {
-  width: 150px;
-  height: 50px;
+  width: 146px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,10 +8,17 @@
   border-radius: 2px;
   margin: 0;
   padding: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
   .add-button {
-    width: 282px;
+    width: 278px;
+    margin: 0 19px;
   }
 }

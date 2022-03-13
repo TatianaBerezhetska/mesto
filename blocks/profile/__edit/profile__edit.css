@@ -1,8 +1,15 @@
 .profile__edit {
   width: 24px;
   height: 24px;
-  margin: 0 0 0 18px;
+  align-self: end;
+  margin: 0 0 8px 18px;
   padding: 0;
+  transition: opacity 0.1s ease-in;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
