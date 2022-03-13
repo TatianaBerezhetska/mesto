@@ -1,0 +1,19 @@
+.popup__caption {
+  width: 358px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #000000;
+  margin: 0 36px 43px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 468px) {
+  .popup__caption {
+    width: 238px;
+    margin: 0 22px 43px;
+  }
+}
