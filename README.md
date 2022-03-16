@@ -21,4 +21,4 @@
 * возможность добавлять больше фотографий.
 
 Выполнено Татьяной Бережецкой
-**Ссылка на проект**: [Место](https://github.com/TatianaBerezhetska/mesto.git)
+**Ссылка на проект**: [Место](https://tatianaberezhetska.github.io/mesto/index.html)
