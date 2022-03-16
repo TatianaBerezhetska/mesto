@@ -15,68 +15,57 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__pic" src="./images/Jacques_Yves_Cousteau.png" alt="Фото профиля">
+      <img class="profile__pic" src="./images/Jacques_Yves_Cousteau.jpg" alt="Фото профиля">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <img class="profile__edit" src="./images/EditButton.svg" alt="Кнопка Редактировать профиль">
+        <button class="profile__edit" type="button"><img src="./images/EditButton.svg" alt="Кнопка Редактировать профиль"></button>
         <p class="profile__caption">Исследователь океана</p>
       </div>
-      <div class="add-button">
-        <img src="./images/Addbutton.png" alt="Кнопка Добавить">
-      </div>
-    </section>
-    <section class="popup">
-      <div class="popup__container">
-        <form class="popup__form">
-          <h2 class="popup__heading">Редактировать профиль</h2>
-          <input type="text" class="popup__name" id="username" value="Жак-Ив Кусто">
-          <input type="text" class="popup__caption" id="caption" value="Исследователь океана">
-          <button type="submit" class="popup__submit-button">Сохранить</button>
-        </form>
-        <button type="button" class="popup__close-button"><img src="images/CloseIcon.png" alt="Закрыть"></button>
-      </div>
+      <button class="profile__add" type="button">
+        <img src="./images/Addbutton.svg" alt="Кнопка Добавить">
+      </button>
     </section>
     <section class="elements">
       <article class="element">
         <img class="element__photo" src="./images/seawater.jpg" alt="Морская волна">
         <div class="element__caption">
           <h2 class="element__description">Бурлящие воды Тихого океана</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
       <article class="element">
         <img class="element__photo" src="./images/whale.jpg" alt="Хвост кита">
         <div class="element__caption">
           <h2 class="element__description">Хвост кита</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
       <article class="element">
         <img class="element__photo" src="./images/sea.jpg" alt="Морская гладь">
         <div class="element__caption">
           <h2 class="element__description">Спокойствие</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
       <article class="element">
         <img class="element__photo" src="./images/seabottom.jpg" alt="Свет на дне океана">
         <div class="element__caption">
           <h2 class="element__description">Игра света</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
       <article class="element">
         <img class="element__photo" src="./images/jellyfish.jpg" alt="Разноцветные медузы">
         <div class="element__caption">
           <h2 class="element__description">Царство медуз</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
       <article class="element">
         <img class="element__photo" src="./images/turtle.jpg" alt="Черепаха под водой">
         <div class="element__caption">
           <h2 class="element__description">Владычица морская</h2>
-          <img class="element__like-button" src="./images/Heart.png" alt="Нравится">
+          <button class="element__like-button" type="button"><img src="./images/LikeButton_disabled.svg" alt="Нравится"></button>
         </div>
       </article>
     </section>
@@ -84,6 +73,18 @@
   <footer class="footer">
     <p class="footer__text"> &copy; 2022 Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <form class="popup__form" name="edit_profile">
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input type="text" class="popup__input" id="username" name="username" value="">
+        <input type="text" class="popup__input" id="caption" name="job" value="">
+        <button type="submit" class="popup__submit-button">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button" aria-label="Close"></button>
+      <!-- Не изменила пробелы, т.к. button вложен в div popup__container наряду с form. -->
+    </div>
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

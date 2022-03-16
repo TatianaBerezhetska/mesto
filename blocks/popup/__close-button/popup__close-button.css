@@ -6,6 +6,7 @@
   height: 32px;
   border: none;
   background: transparent;
+  background-image: url('../../../images/CloseButton.svg');
   margin: 0;
   padding: 0;
   transition: opacity 0.1s ease-in;
