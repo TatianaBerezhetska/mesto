@@ -16,4 +16,8 @@
     width: 238px;
     margin: 0 22px 43px;
   }
+
+  .popup__input:last-of-type {
+    margin-bottom: 0;
+  }
 }

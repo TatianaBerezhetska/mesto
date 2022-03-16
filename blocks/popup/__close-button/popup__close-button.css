@@ -7,6 +7,8 @@
   border: none;
   background: transparent;
   background-image: url('../../../images/CloseButton.svg');
+  object-fit: contain;
+  background-position: center;
   margin: 0;
   padding: 0;
   transition: opacity 0.1s ease-in;
@@ -17,9 +19,24 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 468px) {
+@media screen and (max-width: 1279px) {
+  .popup__close-button {
+    right: 300px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .popup__close-button {
+    top: 150px;
+    right: 150px;
+  }
+}
+
+@media screen and (max-width: 760px) {
   .popup__close-button {
     top: 87px;
     right: 19px;
+    width: 20px;
+    height: 20px;
   }
 }
