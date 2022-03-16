@@ -1,6 +1,8 @@
 .profile__pic {
-  width: 128px;
-  height: 128px;
+  width: 119px;
+  height: 119px;
   object-fit: cover;
   border-radius: 50%;
+  margin: 0;
+  padding: 0;
 }
