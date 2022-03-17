@@ -1,11 +1,15 @@
 .profile {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 119px 326px 40px 1fr 150px;
+  grid-template-areas:
+    "pic name edit . add"
+    "pic info info . add";
+  justify-items: start;
   align-items: center;
   max-width: 880px;
-  margin: 0 auto;
-  padding: 37px 160px;
+  padding: 0;
+  margin: 37px auto 47px;
+  padding: 0;
 }
 
 @media screen and (max-width: 1000px) {

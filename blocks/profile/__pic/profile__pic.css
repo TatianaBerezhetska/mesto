@@ -1,8 +1,10 @@
 .profile__pic {
+  grid-area: pic;
   width: 119px;
   height: 119px;
   object-fit: cover;
   border-radius: 50%;
+  justify-self: center;
   margin: 0;
   padding: 0;
 }

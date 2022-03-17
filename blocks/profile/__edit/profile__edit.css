@@ -1,6 +1,8 @@
 .profile__edit {
+  grid-area: edit;
   width: 24px;
   height: 24px;
+  justify-self: end;
   align-self: end;
   background: transparent;
   background-image: url('../../../images/EditButton.svg');
@@ -8,8 +10,9 @@
   box-sizing: content-box;
   object-fit: contain;
   background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
-  margin: 0 0 8px 18px;
+  margin: 0 0 10px 0;
   padding: 0;
   transition: opacity 0.1s ease-in;
 }

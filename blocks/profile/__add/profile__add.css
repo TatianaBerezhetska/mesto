@@ -1,6 +1,8 @@
 .profile__add {
+  grid-area: add;
   width: 146px;
   height: 46px;
+  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;

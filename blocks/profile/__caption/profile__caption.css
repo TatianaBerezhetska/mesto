@@ -1,7 +1,5 @@
 .profile__caption {
-  grid-column: 1/ span 2;
-  margin: 0;
-  padding: 0;
+  grid-area: info;
   max-width: 336px;
   font-size: 18px;
   line-height: 1.22;
@@ -9,6 +7,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  align-self: start;
+  margin: 0 0 0 32px;
+  padding: 0;
 }
 
 @media screen and (max-width: 768px) {

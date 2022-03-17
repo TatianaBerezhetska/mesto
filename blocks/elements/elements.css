@@ -7,7 +7,7 @@
   justify-items: center;
   gap: 17px 20px;
   margin: 0;
-  padding: 10px 200px;
+  padding: 0 200px;
 }
 
 @media screen and (max-width: 1279px) {
