@@ -15,5 +15,6 @@
   .profile__caption {
     font-size: 14px;
     text-align: center;
+    max-width: 187px;
   }
 }
