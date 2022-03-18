@@ -22,10 +22,11 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .profile__edit {
     width: 18px;
     height: 18px;
-    margin: 10px 0 5px 20px;
+    justify-self: start;
+    margin: 0 0 5px 5px;
   }
 }

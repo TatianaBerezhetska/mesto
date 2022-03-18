@@ -12,16 +12,15 @@
   padding: 0;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
   .profile {
-    padding: 37px 100px;
-  } 
-}
-
-@media screen and (max-width: 768px) {
-  .profile {
-    flex-direction: column;
+    grid-template-columns: 1fr 60px;
+    grid-template-rows: 128px 49px 28px 115px;
+    grid-template-areas:
+    "pic pic"
+    "name edit"
+    "info info"
+    "add add";
     max-width: 320px;
-    padding: 38px 38px 36px;
   }
 }
