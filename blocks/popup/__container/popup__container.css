@@ -3,11 +3,5 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 195px auto;
-}
-
-@media screen and (max-width: 768px) {
-  .popup__container {
-    margin: 123px auto;
-  }
+  margin: 0 auto;
 }
