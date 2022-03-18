@@ -1,7 +1,7 @@
 .popup__close-button {
   position: absolute;
-  top: 155px;
-  right: 385px;
+  top: calc(100vh - 50% - 200px);
+  right: calc(100vw - 50% - 252px);
   width: 32px;
   height: 32px;
   border: none;
@@ -20,32 +20,10 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 555px) {
   .popup__close-button {
-    top: 80px;
-    right: 300px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .popup__close-button {
-    top: 150px;
-    right: 150px;
-  }
-}
-
-@media screen and (max-width: 760px) {
-  .popup__close-button {
-    top: 87px;
-    right: 19px;
+    right: calc(100vw - 50% - 140px);
     width: 20px;
     height: 20px;
-  }
-}
-
-@media screen and (max-height: 555px) {
-  .popup__close-button {
-    top: 40px;
-    right: 19px;
   }
 }
