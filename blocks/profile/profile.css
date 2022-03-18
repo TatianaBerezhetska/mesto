@@ -8,7 +8,7 @@
   align-items: center;
   max-width: 880px;
   padding: 0;
-  margin: 37px auto 47px;
+  margin: 37px auto 48px;
   padding: 0;
 }
 
@@ -22,5 +22,6 @@
     "info info"
     "add add";
     max-width: 320px;
+    margin-bottom: 0;
   }
 }
