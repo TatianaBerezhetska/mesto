@@ -2,7 +2,7 @@
   max-width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 362px);
+  grid-template-rows: repeat(2, 1fr);
   grid-auto-flow: row;
   justify-items: center;
   gap: 20px;
@@ -19,7 +19,7 @@
 @media screen and (max-width: 1024px) {
   .elements {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 362px);
+    grid-template-rows: repeat(3, 1fr);
     padding: 10px 19px;
   }
 }
@@ -27,6 +27,6 @@
 @media screen and (max-width: 600px) {
   .elements {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 361px);
+    grid-template-rows: repeat(6, 1fr);
   }
 }
