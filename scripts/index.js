@@ -1,12 +1,18 @@
 const popup = document.querySelector('.popup');
-const editForm = document.querySelector('.profile__edit');
+const editButton = document.querySelector('.profile__edit');
+const editForm = document.querySelector('.popup_type_edit-profile');
+const addButton = document.querySelector('.profile__add');
+const addForm = document.querySelector('.popup_type_add');
 const closeButton = document.querySelector('.popup__close-button');
 
-const formElement = document.querySelector('.popup__form');
 let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_job');
 let name = document.querySelector('.profile__name');
 let job = document.querySelector('.profile__caption');
+let placeInput = document.querySelector('.popup__input_type_place-name');
+let placeLink = document.querySelector('.popup__input_type_place-link');
+
+const image = document.querySelector('.element__photo');
 
 const initialCards = [
   {
@@ -38,17 +44,15 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.element-template');
 
-function openForm() {
+function openPopup(elementToPopup) {
   popup.classList.add('popup_opened');
-  nameInput.value = name.textContent;
-  jobInput.value = job.textContent;
 }
 
-function closeForm() {
+function closePopup(elementToPopup) {
   popup.classList.remove('popup_opened');
 }
 
-function formSubmitHandler (evt) {
+function formSubmitHandlerEdit (evt) {
   evt.preventDefault();
 
   name.textContent = nameInput.value;
@@ -65,6 +69,22 @@ initialCards.forEach(function(item) {
   elements.append(card)
 });
 
-editForm.addEventListener('click', openForm);
-closeButton.addEventListener('click', closeForm);
-formElement.addEventListener('submit', formSubmitHandler);
+function createCard(card) {
+  const newCard = elementTemplate.content.querySelector('.element').cloneNode(true);
+  // card.querySelector('.element__description').textContent = INPUT;
+  // card.querySelector('.element__photo').src = INPUT;
+  const likeButton = document.querySelector('.element__like-button');
+  // likeButton.addEventListener('click', like);
+  // const deleteButton = 
+  // deleteButton.addEventListener('click', deleteCard);
+  // image.addEventListener('click', openPopup);
+}
+
+function like() {}
+
+function deleteCard() {}
+
+editButton.addEventListener('click', openPopup);
+addButton.addEventListener('click', openPopup);
+closeButton.addEventListener('click', closePopup);
+formElementEdit.addEventListener('submit', formSubmitHandlerEdit);
