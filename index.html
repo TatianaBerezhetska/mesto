@@ -32,7 +32,7 @@
   
   <div class="popup popup_type_edit-profile">
     <div class="popup__container">
-      <form class="popup__form" name="edit_profile">
+      <form class="popup__form popup__form_type_edit" name="edit_profile">
         <h2 class="popup__heading">Редактировать профиль</h2>
         <input type="text" class="popup__input popup__input_type_name" id="username" name="username" value="">
         <input type="text" class="popup__input popup__input_type_job" id="caption" name="job" value="">
@@ -44,7 +44,7 @@
 
   <div class="popup popup_type_add">
     <div class="popup__container">
-      <form class="popup__form" name="add_place">
+      <form class="popup__form popup__form_type_add" name="add_place">
         <h2 class="popup__heading">Новое место</h2>
         <input type="text" class="popup__input popup__input_type_place-name" id="placename" name="username" placeholder="Название" value="">
         <input type="text" class="popup__input popup__input_type_place-link" id="placelink" name="job" placeholder="Ссылка на картинку" value="">
@@ -54,15 +54,22 @@
     </div>
   </div>
 
+  <div class="popup popup_type_pic">
+    <div class="popup__container popup__container_pic">
+      <button type="button" class="popup__close-button" aria-label="Close"></button>
+      <img class="popup__photo" src="#" alt="#">
+      <p class="popup__photo-caption"></p>
+    </div>
+  </div>
+
   <template class="element-template">
     <article class="element">
       <img class="element__photo" src="#" alt="#">
       <div class="element__caption">
         <h2 class="element__description"></h2>
-        <button class="element__like-button" type="button">
-          <img src="./images/LikeButton_disabled.svg" alt="Нравится">
-        </button>
+        <button type="button" class="element__like-button" aria-label="Close"></button>
       </div>
+      <button type="button" class="element__delete-button" aria-label="Delete"></button>
     </article>
   </template>
 
