@@ -12,8 +12,6 @@ const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const name = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__caption');
-nameInput.value = name.textContent;
-jobInput.value = job.textContent;
 
 const inputLink = document.querySelector('.popup__input_type_place-link');
 const inputPlacename = document.querySelector('.popup__input_type_place-name');
@@ -69,7 +67,7 @@ function createCard(item) {
 }
 
 function addCard (newCard, elements) {
-  let newElement = createCard(newCard);
+  const newElement = createCard(newCard);
   elements.prepend(newElement);
 }
 
@@ -108,7 +106,10 @@ popups.forEach((popup) => {
   });
 });
 
-editButton.addEventListener('click', () => {openPopup(editForm)});
+editButton.addEventListener('click', () => {
+  nameInput.value = name.textContent;
+  jobInput.value = job.textContent;
+  openPopup(editForm)});
 addButton.addEventListener('click', () => {openPopup(addForm)});
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleAddFormSubmit);
