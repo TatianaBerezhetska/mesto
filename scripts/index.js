@@ -59,10 +59,12 @@ const del = (evt) => {
 
 function openPopup(popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keyup', closePopupByEsc);
 }
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keyup', closePopupByEsc);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -101,8 +103,7 @@ function handleAddFormSubmit(evt) {
   newCard.name = inputPlacename.value,
   newCard.link = inputLink.value;
   addCard(newCard, elements);
-  inputPlacename.value = "";
-  inputLink.value = "";
+  event.target.reset();
   closePopup(addForm);
 }
 
@@ -113,13 +114,23 @@ function previewPicture(item) {
   openPopup(pic);
 }
 
+function closePopupByEsc(evt) {
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  }
+};
+
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
      if (evt.target.classList.contains('popup__close-button')) {
-        closePopup(popup)
+        closePopup(popup);
       }
-  })
-})
+    if (evt.target.classList.contains('popup_opened')) {
+        closePopup(popup);
+    }
+  });
+});
 
 editButton.addEventListener('click', () => {
   nameInput.value = name.textContent;
