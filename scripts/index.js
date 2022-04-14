@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const popups = document.querySelectorAll('.popup');
 const editButton = document.querySelector('.profile__edit');
 const editForm = document.querySelector('.popup_type_edit-profile');
@@ -83,14 +56,15 @@ initialCards.forEach(function(item) {
 function createCard(item) {
   const cardTemplate = elementTemplate.content;
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const photoElement = cardElement.querySelector('.element__photo');
   
-  cardElement.querySelector('.element__photo').src = item.link;
-  cardElement.querySelector('.element__photo').alt = item.name;
+  photoElement.src = item.link;
+  photoElement.alt = item.name;
   cardElement.querySelector('.element__description').textContent = item.name;
 
   cardElement.querySelector('.element__like-button').addEventListener('click', like);
   cardElement.querySelector('.element__delete-button').addEventListener('click', del);
-  cardElement.querySelector('.element__photo').addEventListener('click', () => previewPicture(item));
+  photoElement.addEventListener('click', () => previewPicture(item));
   return cardElement;
 }
 
@@ -117,8 +91,8 @@ function previewPicture(item) {
 }
 
 function closePopupByEsc(evt) {
-  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 };
