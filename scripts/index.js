@@ -78,6 +78,7 @@ function handleAddFormSubmit(evt) {
   newCard.link = inputLink.value;
   addCard(newCard, elements);
   event.target.reset();
+  disableButton(event.target.querySelector('.popup__submit-button'));
   closePopup(addForm);
 }
 
