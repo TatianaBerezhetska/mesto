@@ -19,77 +19,52 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const username = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__caption');
 
-// const inputLink = document.querySelector('.popup__input_type_place-link');
-// const inputPlacename = document.querySelector('.popup__input_type_place-name');
-
-const elements = document.querySelector('.elements');
-
 const userInfo = new UserInfo({username, job});
 
-const userEditForm = new PopupWithForm('.popup_type_edit-profile', {
-  handleProfileFormSubmit: (profileData) => {
+const userEditForm = new PopupWithForm({
+  popupSelector: '.popup_type_edit-profile', 
+  handleSubmitForm: (profileData) => {
     userInfo.setUserInfo(profileData);
     userEditForm.close();
   }
 });
-
-const addPlaceForm = new PopupWithForm('.popup_type_add', handleAddFormSubmit);
-
-function handleAddFormSubmit(evt) {
-  evt.preventDefault();
-  const newCard = {};
-  newCard.name = inputPlacename.value,
-  newCard.link = inputLink.value;
-  // const newAddedCard = new Section({data: newCard, renderer: (item) => {
-  //   const card = new Card(item, '.element-template');
-  //   const cardElement = card.createCard();
-  //   return cardElement;
-  // }}, '.elements');
-  // newAddedCard.addItem();
-  addCard(newCard, elements);
-  event.target.reset();
-  newPlaceValidation.disableButton();
-  addPlaceForm.close();
-}
 
 const photoPreview = new PopupWithImage('.popup_type_pic');
 
 const profileValidation = new FormValidator(validationConfig, formElementEdit);
 const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 
+const cardList = new Section({ data: initialCards, renderer: (item) => {
+  const card = new Card(item, '.element-template', () => {
+    photoPreview.open(item.name, item.link);
+    photoPreview.setEventListeners();
+  });
+  const cardElement = card.createCard();
+  return cardElement;
+}}, '.elements');
+
+const addPlaceForm = new PopupWithForm({
+  popupSelector: '.popup_type_add', 
+  handleSubmitForm: (placeData) => {
+    const newPlace = {
+    name: placeData.placename,
+    link: placeData.placelink};
+    const addedCard = new Card(newPlace, '.element-template', () => {
+      photoPreview.open(newPlace.name, newPlace.link);
+      photoPreview.setEventListeners();
+    });
+    cardList.addItem(addedCard.createCard());
+    
+    newPlaceValidation.disableButton();
+    addPlaceForm.close();
+  }});
+
+cardList.renderItems();
 userEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
 
 profileValidation.enableValidation();
 newPlaceValidation.enableValidation();
-
-// function handleProfileFormSubmit(evt) {
-//   evt.preventDefault();
-//   name.textContent = nameInput.value;
-//   job.textContent = jobInput.value;
-//   userEditForm.close();
-// }
-
-// function createNewCard(item) {
-//   const card = new Card(item, '.element-template');
-//   const cardElement = card.createCard();
-//   return cardElement;
-// };
-
-// function addCard (newCard, elements) {
-//   elements.prepend(createNewCard(newCard));
-// };
-
-const newItem = new Section({ data: initialCards, renderer: (item) => {
-  const card = new Card(item, '.element-template', {
-    handleCardClick: () => {
-      photoPreview.open();
-    }});
-  const cardElement = card.createCard();
-  return cardElement;
-}}, '.elements');
-
-newItem.renderItems();
 
 editButton.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();

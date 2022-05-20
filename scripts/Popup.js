@@ -34,7 +34,7 @@ class Popup {
 
 // ----- Popup with forms -------------------------------------------------
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, handleSubmitForm) {
+  constructor({popupSelector, handleSubmitForm}) {
     super(popupSelector);
     this._handler = handleSubmitForm;
     this._popupForm = this._popup.querySelector('.popup__form');
@@ -53,8 +53,6 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      console.log(this._getInputValues()); // {username: 'имя', job: 'инфо'}
-      console.log(this._handler);
       this._handler(this._getInputValues());
     });
   };
@@ -69,17 +67,16 @@ export class PopupWithForm extends Popup {
 export class PopupWithImage extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
-    // this._picture = data.link;
-    // this._pictureDescription = data.name;
+    
   }
 
-  open() {
-    const pic = document.querySelector('.popup_type_pic');
-    const popupPic = pic.querySelector('.popup__photo');
-    const popupCaption = pic.querySelector('.popup__photo-caption')
-    popupPic.src = this._picture;
-    popupPic.alt = this._pictureDescription;
-    popupCaption.textContent = this._pictureDescription;
+  open(name, link) {
+    const popupPic = this._popup.querySelector('.popup__photo');
+    const popupCaption = this._popup.querySelector('.popup__photo-caption')
+    popupPic.src = link;
+    popupPic.alt = name;
+    popupCaption.textContent = name;
+    
     super.open();
   }
 };

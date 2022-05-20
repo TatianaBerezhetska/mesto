@@ -39,16 +39,6 @@ class Card {
     this._element = null;
   }
 
-  // _previewPicture() {
-  //   const pic = document.querySelector('.popup_type_pic');
-  //   const popupPic = pic.querySelector('.popup__photo');
-  //   const popupCaption = pic.querySelector('.popup__photo-caption');
-  //   popupPic.src = this._link;
-  //   popupPic.alt = this._name;
-  //   popupCaption.textContent = this._name;
-  //   // openPopup(pic);
-  // }
-
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       this._handleLike(this);
@@ -57,8 +47,7 @@ class Card {
       this._removeCard(this);
     });
     this._photoElement.addEventListener('click', () => {
-      this._handleCardClick;
-      
+      this._handleCardClick(this._name, this._link); 
     });
   };
 
