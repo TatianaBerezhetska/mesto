@@ -1,10 +1,9 @@
-import { openPopup } from './utils.js';
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   };
 
   _getTemplate() {
@@ -40,15 +39,15 @@ class Card {
     this._element = null;
   }
 
-  _previewPicture() {
-    const pic = document.querySelector('.popup_type_pic');
-    const popupPic = pic.querySelector('.popup__photo');
-    const popupCaption = pic.querySelector('.popup__photo-caption');
-    popupPic.src = this._link;
-    popupPic.alt = this._name;
-    popupCaption.textContent = this._name;
-    openPopup(pic);
-  }
+  // _previewPicture() {
+  //   const pic = document.querySelector('.popup_type_pic');
+  //   const popupPic = pic.querySelector('.popup__photo');
+  //   const popupCaption = pic.querySelector('.popup__photo-caption');
+  //   popupPic.src = this._link;
+  //   popupPic.alt = this._name;
+  //   popupCaption.textContent = this._name;
+  //   // openPopup(pic);
+  // }
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
@@ -58,7 +57,8 @@ class Card {
       this._removeCard(this);
     });
     this._photoElement.addEventListener('click', () => {
-      this._previewPicture(this);
+      this._handleCardClick;
+      
     });
   };
 
