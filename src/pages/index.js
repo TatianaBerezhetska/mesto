@@ -38,8 +38,7 @@ const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 
 const cardList = new Section({ data: initialCards, renderer: (item) => {
   const card = new Card(item, '.element-template', () => {
-    photoPreview.open(item.name, item.link);
-    photoPreview.setEventListeners();
+    handleCardClick(item);
   });
   const cardElement = card.createCard();
   return cardElement;
@@ -52,8 +51,7 @@ const addPlaceForm = new PopupWithForm({
     name: placeData.placename,
     link: placeData.placelink};
     const addedCard = new Card(newPlace, '.element-template', () => {
-      photoPreview.open(newPlace.name, newPlace.link);
-      photoPreview.setEventListeners();
+      handleCardClick(newPlace);
     });
     cardList.addItem(addedCard.createCard());
     
@@ -61,9 +59,14 @@ const addPlaceForm = new PopupWithForm({
     addPlaceForm.close();
   }});
 
+function handleCardClick(card) {
+  photoPreview.open(card.name, card.link);
+};
+
 cardList.renderItems();
 userEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
+photoPreview.setEventListeners();
 
 profileValidation.enableValidation();
 newPlaceValidation.enableValidation();
