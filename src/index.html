@@ -5,22 +5,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 
 <body class="body">
   <header class="header">
-    <img class="logo" src="./images/logo.svg" alt="Место Россия">
+    <img class="logo" src="<%=require('../images/logo.svg')%>" alt="Место Россия">
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__pic" src="./images/Jacques_Yves_Cousteau.jpg" alt="Фото профиля">
+      <img class="profile__pic" src="<%require('../images/Jacques_Yves_Cousteau.jpg')%>" alt="Фото профиля">
       <h1 class="profile__name">Жак-Ив Кусто</h1>
       <button class="profile__edit" type="button" aria-label="Edit"></button>
       <p class="profile__caption">Исследователь океана</p>
       <button class="profile__add" type="button">
-        <img  class="profile__add-icon" src="./images/Addbutton.svg" alt="Кнопка Добавить">
+        <img  class="profile__add-icon" src="<%=require('../images/Addbutton.svg')%>" alt="Кнопка Добавить">
       </button>
     </section>
     <section class="elements">
@@ -77,6 +76,5 @@
     </article>
   </template>
 
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

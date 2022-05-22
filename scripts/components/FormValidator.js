@@ -1,4 +1,4 @@
-import { validationConfig } from './initial.js';
+import { validationConfig } from '../initial.js';
 
 class FormValidator {
   constructor(validationConfig, formElement) {

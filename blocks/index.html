@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="body">
+  <header class="header">
+    <img class="logo" src="../images/logo.svg" alt="Место Россия">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__pic" src="../images/Jacques_Yves_Cousteau.jpg" alt="Фото профиля">
+      <h1 class="profile__name">Жак-Ив Кусто</h1>
+      <button class="profile__edit" type="button" aria-label="Edit"></button>
+      <p class="profile__caption">Исследователь океана</p>
+      <button class="profile__add" type="button">
+        <img  class="profile__add-icon" src="../images/Addbutton.svg" alt="Кнопка Добавить">
+      </button>
+    </section>
+    <section class="elements">
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__text"> &copy; 2022 Mesto Russia</p>
+  </footer>
+  
+  <div class="popup popup_type_edit-profile">
+    <div class="popup__container">
+      <form class="popup__form popup__form_type_edit" name="edit_profile" novalidate>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input type="text" class="popup__input popup__input_type_name" required id="username" name="username" value="" minlength="2" maxlength="40">
+        <span id="username-error" class="popup__error"></span>
+        <input type="text" class="popup__input popup__input_type_job" required id="caption" name="job" value="" minlength="2" maxlength="200">
+        <span id="caption-error" class="popup__error"></span>
+        <button type="submit" class="popup__submit-button">Сохранить</button>
+      </form>
+      <button type="button" class="popup__close-button" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <form class="popup__form popup__form_type_add" name="add_place" novalidate>
+        <h2 class="popup__heading">Новое место</h2>
+        <input type="text" class="popup__input popup__input_type_place-name" required id="placename" name="placename" placeholder="Название" value="" minlength="2" maxlength="30">
+        <span id="placename-error" class="popup__error"></span>
+        <input type="url" class="popup__input popup__input_type_place-link" required id="placelink" name="placelink" placeholder="Ссылка на картинку" value="">
+        <span id="placelink-error" class="popup__error"></span>
+        <button type="submit" class="popup__submit-button">Создать</button>
+      </form>
+      <button type="button" class="popup__close-button" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="popup popup_dark-bg popup_type_pic">
+    <div class="popup__container popup__container_pic">
+      <button type="button" class="popup__close-button" aria-label="Close"></button>
+      <img class="popup__photo" src="#" alt="#">
+      <p class="popup__photo-caption"></p>
+    </div>
+  </div>
+
+  <template class="element-template">
+    <article class="element">
+      <img class="element__photo" src="#" alt="#">
+      <div class="element__caption">
+        <h2 class="element__description"></h2>
+        <button type="button" class="element__like-button" aria-label="Close"></button>
+      </div>
+      <button type="button" class="element__delete-button" aria-label="Delete"></button>
+    </article>
+  </template>
+
+  <script type="module" src="./pages/index.js"></script>
+</body>
+</html>
