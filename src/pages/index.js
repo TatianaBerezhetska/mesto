@@ -38,8 +38,7 @@ const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 
 const cardList = new Section({ data: initialCards, renderer: (item) => {
   const card = createNewCard(item);
-  const cardElement = card.createCard();
-  return cardElement;
+  return card;
 }}, '.elements');
 
 const addPlaceForm = new PopupWithForm({
@@ -48,8 +47,7 @@ const addPlaceForm = new PopupWithForm({
     const newPlace = {
     name: placeData.placename,
     link: placeData.placelink};
-    const addedCard = createNewCard(newPlace);
-    cardList.addItem(addedCard.createCard());
+    cardList.addItem(createNewCard(newPlace));
     
     newPlaceValidation.disableButton();
     addPlaceForm.close();
@@ -59,7 +57,8 @@ function createNewCard(item) {
   const newCard = new Card(item, '.element-template', () => {
       handleCardClick(item);
     });
-    return newCard;
+    const element = newCard.createCard();
+    return element;
 };
 
 function handleCardClick(card) {
