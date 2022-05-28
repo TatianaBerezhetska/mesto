@@ -28,4 +28,4 @@
 * сохранение изменений при перезагрузке страницы.
 
 Выполнено Татьяной Бережецкой
-**Ссылка на проект**: [Место](https://tatianaberezhetska.github.io/mesto/index.html)
+**Ссылка на проект**: [Место](https://tatianaberezhetska.github.io/mesto)
