@@ -1,11 +1,13 @@
 import './index.css';
 
+import Api from '../scripts/components/Api.js';
+
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
-import { initialCards } from '../scripts/initial.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithSubmit from '../scripts/components/PopupWithSubmit.js';
 
 import { validationConfig } from '../scripts/initial.js';
 import FormValidator from '../scripts/components/FormValidator.js';
@@ -21,12 +23,37 @@ const jobInput = document.querySelector('.popup__input_type_job');
 const username = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__caption');
 
-const userInfo = new UserInfo({username, job});
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
+  userUrl: 'https://mesto.nomoreparties.co/v1/cohort-42/users/me',
+  headers: {
+    authorization: '7b060f74-b72c-47c7-a5e8-ffbce8b574c7',
+    'Content-Type': 'application/json'
+  }
+});
+
+const userInfo = new UserInfo({});
+const cardList = new Section({ data: [], renderer: (item) => {
+  const card = createNewCard(item);
+  return card;
+}}, '.elements');
+
+api.getAllData()
+  .then(data => {
+    const [userData, cardsArray] = data;
+    userInfo.setInitialInfo(userData);
+    userInfo.setUserInfo(userData);
+    
+    cardList.data = cardsArray;
+    
+    cardList.renderItems(cardsArray);
+  });
 
 const userEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile', 
   handleSubmitForm: (profileData) => {
     userInfo.setUserInfo(profileData);
+    api.updateUserInfo(profileData);
     userEditForm.close();
   }
 });
@@ -36,18 +63,18 @@ const photoPreview = new PopupWithImage('.popup_type_pic');
 const profileValidation = new FormValidator(validationConfig, formElementEdit);
 const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 
-const cardList = new Section({ data: initialCards, renderer: (item) => {
-  const card = createNewCard(item);
-  return card;
-}}, '.elements');
-
 const addPlaceForm = new PopupWithForm({
   popupSelector: '.popup_type_add', 
   handleSubmitForm: (placeData) => {
     const newPlace = {
     name: placeData.placename,
     link: placeData.placelink};
-    cardList.addItem(createNewCard(newPlace));
+    console.log(cardList);
+    api.postNewCard(newPlace)
+      .then((cardData) => {
+        const newCard = createNewCard(cardData);
+        cardList.addItem(newCard);
+      })
     
     newPlaceValidation.disableButton();
     addPlaceForm.close();
@@ -65,7 +92,6 @@ function handleCardClick(card) {
   photoPreview.open(card.name, card.link);
 };
 
-cardList.renderItems();
 userEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
 photoPreview.setEventListeners();
