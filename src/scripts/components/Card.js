@@ -1,9 +1,15 @@
+import {userInfo} from "../../pages/index.js";
+
 class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor({data, handleCardClick, handleLikeClick, handleDeleteClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
+    this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this.handleLikeClick = handleLikeClick;
+    this.handleDeleteClick = handleDeleteClick;
   };
 
   _getTemplate() {
@@ -22,19 +28,33 @@ class Card {
     this._photoElement.src = this._link;
     this._photoElement.alt = this._name;
     this._element.querySelector('.element__description').textContent = this._name;
+    this._element.querySelector('.element__like-count').textContent = this._likes.length;
   
     this._likeButton = this._element.querySelector('.element__like-button');
     this._deleteButton = this._element.querySelector('.element__delete-button');
+    this._setDeleteButtonState();
     this._setEventListeners();
 
     return this._element;
+  };
+
+  getCardId() {
+    return this._id
   };
 
   _handleLike() {
     this._likeButton.classList.toggle('element__like-button_active');
   };
 
-  _removeCard() {
+  _setDeleteButtonState() {
+    if(userInfo._userName !== this._owner.name) {
+      this._deleteButton.classList.add('element__delete-button_invisible');
+    } else {
+      this._deleteButton.classList.remove('element__delete-button_invisible');
+    }
+  }
+
+  removeCard() {
     this._element.remove();
     this._element = null;
   }
@@ -42,9 +62,10 @@ class Card {
   _setEventListeners() {
     this._likeButton.addEventListener('click', () => {
       this._handleLike(this);
+      this._handleLikeClick(this);
     });
     this._deleteButton.addEventListener('click', () => {
-      this._removeCard(this);
+      this.handleDeleteClick();
     });
     this._photoElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link); 

@@ -76,6 +76,24 @@ export default class Api {
       console.log(`Ошибка добавления новой карточки: ${err}`);
     });
   }
+
+  deleteCard(card) {
+    return fetch(`${this.url}/${card._id}`, {
+      method: 'DELETE',
+      headers: this.headers,
+      body: JSON.stringify({
+        _id: card._id
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return Promise.resolve(res.json());
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка удаления карточки: ${err}`);
+    });
+  }
 }
 
 //Примерная струкура класса указана у вас в ТЗ, но если говорить о конкретных методах которые должен осуществлять данный класс, то это:

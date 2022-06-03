@@ -32,7 +32,7 @@ const api = new Api({
   }
 });
 
-const userInfo = new UserInfo({});
+export const userInfo = new UserInfo({});
 const cardList = new Section({ data: [], renderer: (item) => {
   const card = createNewCard(item);
   return card;
@@ -69,7 +69,6 @@ const addPlaceForm = new PopupWithForm({
     const newPlace = {
     name: placeData.placename,
     link: placeData.placelink};
-    console.log(cardList);
     api.postNewCard(newPlace)
       .then((cardData) => {
         const newCard = createNewCard(cardData);
@@ -80,10 +79,21 @@ const addPlaceForm = new PopupWithForm({
     addPlaceForm.close();
   }});
 
+const submitDeleteForm = new PopupWithSubmit({
+  popupSelector: '.popup_type_submit-action',
+  handleSubmitForm: (card) => {
+    api.deleteCard(card.getCardId())
+    card.removeCard();
+  }
+});
+
 function createNewCard(item) {
-  const newCard = new Card(item, '.element-template', () => {
-      handleCardClick(item);
-    });
+  const newCard = new Card({
+    data: item,
+    handleCardClick: () => { handleCardClick(item) }, 
+    handleLikeClick: () => { },
+    handleDeleteClick: () => { handleDeleteClick(item) }
+  }, '.element-template');
     const element = newCard.createCard();
     return element;
 };
@@ -91,6 +101,11 @@ function createNewCard(item) {
 function handleCardClick(card) {
   photoPreview.open(card.name, card.link);
 };
+
+function handleDeleteClick() {
+  submitDeleteForm.open();
+  submitDeleteForm.setEventListeners();
+}
 
 userEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
