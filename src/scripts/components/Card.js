@@ -5,6 +5,7 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
+    this._id = data._id;
     this._owner = data.owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
@@ -39,7 +40,7 @@ class Card {
   };
 
   getCardId() {
-    return this._id
+    return this._id;
   };
 
   _handleLike() {
@@ -52,11 +53,6 @@ class Card {
     } else {
       this._deleteButton.classList.remove('element__delete-button_invisible');
     }
-  }
-
-  removeCard() {
-    this._element.remove();
-    this._element = null;
   }
 
   _setEventListeners() {

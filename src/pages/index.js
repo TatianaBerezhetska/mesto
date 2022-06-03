@@ -90,11 +90,14 @@ function createNewCard(item) {
     handleCardClick: () => { handleCardClick(item) }, 
     handleLikeClick: () => { },
     handleDeleteClick: (event) => { 
-      const cardId = item._id;
+      const cardId = newCard.getCardId();
       const cardElement = event.target.closest('.element');
       submitDeleteForm.setSubmitHandler(() => {
         api.deleteCard(cardId)
-          .then(() => {cardElement.remove()})
+          .then(() => {
+            cardElement.remove();
+            submitDeleteForm.close();
+          })
           .catch((err) => {
             console.log(`Ошибка при удалении карточки ${err}`)
           })

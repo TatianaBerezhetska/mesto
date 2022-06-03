@@ -94,11 +94,45 @@ export default class Api {
       console.log(`Ошибка удаления карточки: ${err}`);
     });
   }
+
+  likeCard(cardId) {
+    return fetch(`${this.url}/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this.headers,
+      body: JSON.stringify({
+        _id: cardId,
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return Promise.resolve(res.json());
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка лайка карточки: ${err}`);
+    });
+  }
+
+  dislikeCard(cardId) {
+    return fetch(`${this.url}/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this.headers,
+      body: JSON.stringify({
+        _id: cardId,
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return Promise.resolve(res.json());
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка лайка карточки: ${err}`);
+    });
+  }
+
 }
 
-//Примерная струкура класса указана у вас в ТЗ, но если говорить о конкретных методах которые должен осуществлять данный класс, то это:
-// 
-// удалить карточку (DELETE)
 // заменить аватар (PATCH)
 // “залайкать” карточку (PUT)
 // удалить лайк карточки (DELETE)
