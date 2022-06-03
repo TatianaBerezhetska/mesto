@@ -64,8 +64,8 @@ class Card {
       this._handleLike(this);
       this._handleLikeClick(this);
     });
-    this._deleteButton.addEventListener('click', () => {
-      this.handleDeleteClick();
+    this._deleteButton.addEventListener('click', (event) => {
+      this.handleDeleteClick(event);
     });
     this._photoElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link); 

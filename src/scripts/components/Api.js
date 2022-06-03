@@ -77,12 +77,12 @@ export default class Api {
     });
   }
 
-  deleteCard(card) {
-    return fetch(`${this.url}/${card._id}`, {
+  deleteCard(cardId) {
+    return fetch(`${this.url}/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
       body: JSON.stringify({
-        _id: card._id
+        _id: cardId,
       })
     })
     .then((res) => {

@@ -20,8 +20,10 @@ const addButton = document.querySelector('.profile__add');
 
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
-const username = document.querySelector('.profile__name');
-const job = document.querySelector('.profile__caption');
+// const username = document.querySelector('.profile__name');
+// const job = document.querySelector('.profile__caption');
+
+// const card = document.querySelector('.element');
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
@@ -80,19 +82,25 @@ const addPlaceForm = new PopupWithForm({
   }});
 
 const submitDeleteForm = new PopupWithSubmit({
-  popupSelector: '.popup_type_submit-action',
-  handleSubmitForm: (card) => {
-    api.deleteCard(card.getCardId())
-    card.removeCard();
-  }
-});
+  popupSelector: '.popup_type_submit-action'});
 
 function createNewCard(item) {
   const newCard = new Card({
     data: item,
     handleCardClick: () => { handleCardClick(item) }, 
     handleLikeClick: () => { },
-    handleDeleteClick: () => { handleDeleteClick(item) }
+    handleDeleteClick: (event) => { 
+      const cardId = item._id;
+      const cardElement = event.target.closest('.element');
+      submitDeleteForm.setSubmitHandler(() => {
+        api.deleteCard(cardId)
+          .then(() => {cardElement.remove()})
+          .catch((err) => {
+            console.log(`Ошибка при удалении карточки ${err}`)
+          })
+      })
+      submitDeleteForm.open();
+    }
   }, '.element-template');
     const element = newCard.createCard();
     return element;
@@ -102,11 +110,7 @@ function handleCardClick(card) {
   photoPreview.open(card.name, card.link);
 };
 
-function handleDeleteClick() {
-  submitDeleteForm.open();
-  submitDeleteForm.setEventListeners();
-}
-
+submitDeleteForm.setEventListeners();
 userEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
 photoPreview.setEventListeners();
