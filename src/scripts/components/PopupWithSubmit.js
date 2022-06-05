@@ -16,5 +16,10 @@ export default class PopupWithSubmit extends Popup {
       event.preventDefault();
       this._handler(event);
     })
+    document.addEventListener('keydown', (event) => {
+      if(event.key === "Enter") {
+        this._handler();
+      }
+    })
   }
 }

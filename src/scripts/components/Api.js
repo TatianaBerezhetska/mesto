@@ -45,11 +45,19 @@ export default class Api {
         name: data.username,
         about: data.job
       })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return Promise.resolve(res.json());
+      }
+    })
+    .catch((err) => {
+      console.log(`Ошибка обновления аватара: ${err}`);
     });
   }
 
   updateUserAvatar(res) {
-    fetch(`${this.userUrl}/avatar`, {
+    return fetch(`${this.userUrl}/avatar`, {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify({
@@ -117,7 +125,7 @@ export default class Api {
       }
     })
     .catch((err) => {
-      console.log(`Ошибка дизлайка карточки: ${err}`);
+      console.log(`Ошибка лайка карточки: ${err}`);
     });
   }
 
@@ -135,11 +143,8 @@ export default class Api {
       }
     })
     .catch((err) => {
-      console.log(`Ошибка лайка карточки: ${err}`);
+      console.log(`Ошибка дизлайка карточки: ${err}`);
     });
   }
 
 }
-
-// “залайкать” карточку (PUT)
-// удалить лайк карточки (DELETE)

@@ -1,7 +1,6 @@
 import './index.css';
 
 import Api from '../scripts/components/Api.js';
-
 import Card from '../scripts/components/Card.js';
 import Section from '../scripts/components/Section.js';
 import UserInfo from '../scripts/components/UserInfo.js';
@@ -22,10 +21,10 @@ const addButton = document.querySelector('.profile__add');
 
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
-// const username = document.querySelector('.profile__name');
-// const job = document.querySelector('.profile__caption');
 
-// const card = document.querySelector('.element');
+const likeCount = document.querySelector('.element__like-count');
+
+let userId;
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-42/cards',
@@ -36,7 +35,7 @@ const api = new Api({
   }
 });
 
-export const userInfo = new UserInfo({});
+const userInfo = new UserInfo({});
 const cardList = new Section({ data: [], renderer: (item) => {
   const card = createNewCard(item);
   return card;
@@ -45,30 +44,37 @@ const cardList = new Section({ data: [], renderer: (item) => {
 api.getAllData()
   .then(data => {
     const [userData, cardsArray] = data;
+    
     userInfo.setInitialInfo(userData);
     userInfo.setUserInfo(userData);
     
+    userId = userData._id;
     cardList.data = cardsArray;
     
     cardList.renderItems(cardsArray);
-  });
+  })
+  .then()
 
 const userEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile', 
   handleSubmitForm: (profileData) => {
-    userInfo.setUserInfo(profileData);
-    //render
-    api.updateUserInfo(profileData);
-    //finally stop rendering
-    userEditForm.close();
+    userEditForm.renderLoading(true);
+    api.updateUserInfo(profileData)
+      .then((profileData) => {
+        userInfo.setInitialInfo(profileData)
+      })
+      .finally(() => {
+        userEditForm.renderLoading(false);
+        userEditForm.close();
+      })
   }
 });
 
 const avatarEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit-avatar',
-  handleSubmitForm: (link) => {
+  handleSubmitForm: (url) => {
     avatarEditForm.renderLoading(true);
-    api.updateUserAvatar(link)
+    api.updateUserAvatar(url)
       .then((link) => {
         userInfo.updateAvatar(link)
       })
@@ -77,8 +83,6 @@ const avatarEditForm = new PopupWithForm({
         avatarEditForm.close()})
   }
 })
-
-// console.log(avatarEditForm.handleSubmitForm)//undefined
 
 const photoPreview = new PopupWithImage('.popup_type_pic');
 
@@ -89,17 +93,20 @@ const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 const addPlaceForm = new PopupWithForm({
   popupSelector: '.popup_type_add', 
   handleSubmitForm: (placeData) => {
+    addPlaceForm.renderLoading(true);
     const newPlace = {
     name: placeData.placename,
     link: placeData.placelink};
     api.postNewCard(newPlace)
       .then((cardData) => {
-        const newCard = createNewCard(cardData);
+        const newCard = createNewCard(cardData, cardData._id);
         cardList.addItem(newCard);
       })
-    
-    newPlaceValidation.disableButton();
-    addPlaceForm.close();
+      .finally(() => {
+        addPlaceForm.renderLoading(false);
+        newPlaceValidation.disableButton();
+        addPlaceForm.close();
+      })    
   }});
 
 const submitDeleteForm = new PopupWithSubmit({
@@ -110,22 +117,20 @@ function createNewCard(item) {
     data: item,
     handleCardClick: () => { handleCardClick(item) }, 
     handleLikeClick: () => {
-      const cardId = newCard.getCardId(); //ok
-      // console.log(`cardId ${cardId}`)
-      if(newCard.isLiked()) {
-        console.log(newCard.isLiked())
+      const cardId = newCard.getCardId();
+      if(newCard.isLiked(newCard)) {
         api.dislikeCard(cardId)
           .then((res)=> {
             newCard.toggleLike();
-            newCard.likes = res.likes;
+            newCard.updateLikes(res.likes.length);
           })
           .catch((err) => {
             console.log(`Дизлайк не работает ${err}`)})
       } else {
         api.likeCard(cardId)
-        .then(()=> {
+        .then((res)=> {
           newCard.toggleLike();
-          newCard.likes = res.likes;
+          newCard.updateLikes(res.likes.length);
         })
         .catch((err) => {
           console.log(`Лайк не работает ${err}`)
@@ -146,7 +151,7 @@ function createNewCard(item) {
       })
       submitDeleteForm.open();
     }
-  }, '.element-template');
+  }, '.element-template', userInfo.getUserInfo().id);
     const element = newCard.createCard();
     return element;
 };

@@ -12,6 +12,8 @@ export default class UserInfo {
     const userValueDefault = {};
     userValueDefault.name = this._userName;
     userValueDefault.job = this._userInfo;
+    userValueDefault.id = this._id;
+
 
     return userValueDefault;
   };
@@ -20,6 +22,7 @@ export default class UserInfo {
     this._userName = newData['name'];
     this._userInfo = newData['about'];
     this._avatar = newData['avatar'];
+    this._id = newData['_id'];
   };
 
   setInitialInfo(data) {
