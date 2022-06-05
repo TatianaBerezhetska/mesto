@@ -33,6 +33,7 @@ class Card {
   
     this._likeButton = this._element.querySelector('.element__like-button');
     this._deleteButton = this._element.querySelector('.element__delete-button');
+    // this._setLikeState();
     this._setDeleteButtonState();
     this._setEventListeners();
 
@@ -45,6 +46,12 @@ class Card {
 
   isLiked() {
     return this._likeButton.classList.contains('element__like-button_active');
+  }
+
+  _setLikeState() {
+    if(this.isLiked) {
+      this._likeButton.classList.add('element__like-button_active');
+    }
   }
 
   toggleLike() {
@@ -60,12 +67,8 @@ class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', (event) => {
-      // this.handleLike(this);
-      // console.log(this.isLiked()) false
-      // console.log(event) ok
-      console.log(`this.handleLikeClick(event) = ${this.handleLikeClick(event)}`)
-      this.handleLikeClick(event);
+    this._likeButton.addEventListener('click', () => {
+      this.handleLikeClick(this);
     });
     this._deleteButton.addEventListener('click', (event) => {
       this.handleDeleteClick(event);

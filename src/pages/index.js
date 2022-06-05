@@ -78,7 +78,7 @@ const avatarEditForm = new PopupWithForm({
   }
 })
 
-console.log(avatarEditForm.handleSubmitForm)//undefined
+// console.log(avatarEditForm.handleSubmitForm)//undefined
 
 const photoPreview = new PopupWithImage('.popup_type_pic');
 
@@ -109,25 +109,26 @@ function createNewCard(item) {
   const newCard = new Card({
     data: item,
     handleCardClick: () => { handleCardClick(item) }, 
-    handleLikeClick: (event) => {
-      // console.log('запускается handleLikeClick из индекс') //работает
-      const cardId = newCard.getCardId();
-      // console.log(`cardId = ${cardId}`) //работает
-      // console.log(`newCard.isLiked() = ${newCard.isLiked()}`) //работает
-      
+    handleLikeClick: () => {
+      const cardId = newCard.getCardId(); //ok
+      // console.log(`cardId ${cardId}`)
       if(newCard.isLiked()) {
-        // console.log(`newCard.isLiked() = ${newCard.isLiked()}`) //работает
-        
-        api.dislikeCard(cardId) //не работает
-          .then(()=> {newCard.toggleLike()})
+        console.log(newCard.isLiked())
+        api.dislikeCard(cardId)
+          .then((res)=> {
+            newCard.toggleLike();
+            newCard.likes = res.likes;
+          })
           .catch((err) => {
             console.log(`Дизлайк не работает ${err}`)})
       } else {
         api.likeCard(cardId)
-        .then(()=> {newCard.toggleLike()})
+        .then(()=> {
+          newCard.toggleLike();
+          newCard.likes = res.likes;
+        })
         .catch((err) => {
           console.log(`Лайк не работает ${err}`)
-        // console.log(`else newCard.isLiked() = ${newCard.isLiked()}`)
         })
       }},
     handleDeleteClick: (event) => { 
