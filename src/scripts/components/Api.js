@@ -48,15 +48,23 @@ export default class Api {
     });
   }
 
-//   updateUserAvatar(data) {
-//     fetch(`${this.userUrl}/me`, {
-//     method: 'PATCH',
-//     headers: this.headers,
-//     body: JSON.stringify({
-//       avatar: '',
-//   })
-// });
-//   }
+  updateUserAvatar(res) {
+    fetch(`${this.userUrl}/avatar`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: res.avatar,
+      })
+    })
+      .then((res) => {
+        if (res.ok) {
+          return Promise.resolve(res.json());
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка обновления аватара: ${err}`);
+      });
+  }
 
   postNewCard(newCard) {
     return fetch(this.url, {
@@ -109,7 +117,7 @@ export default class Api {
       }
     })
     .catch((err) => {
-      console.log(`Ошибка лайка карточки: ${err}`);
+      console.log(`Ошибка дизлайка карточки: ${err}`);
     });
   }
 
@@ -133,6 +141,5 @@ export default class Api {
 
 }
 
-// заменить аватар (PATCH)
 // “залайкать” карточку (PUT)
 // удалить лайк карточки (DELETE)

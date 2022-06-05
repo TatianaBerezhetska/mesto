@@ -27,4 +27,8 @@ export default class UserInfo {
     this._description.textContent = data.about;
     this._profilePic.src = data.avatar;
   }
+
+  updateAvatar(data) {
+    this._profilePic.src = data.avatar;
+  }
 }

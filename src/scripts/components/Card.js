@@ -43,7 +43,11 @@ class Card {
     return this._id;
   };
 
-  _handleLike() {
+  isLiked() {
+    return this._likeButton.classList.contains('element__like-button_active');
+  }
+
+  toggleLike() {
     this._likeButton.classList.toggle('element__like-button_active');
   };
 
@@ -56,9 +60,12 @@ class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => {
-      this._handleLike(this);
-      this._handleLikeClick(this);
+    this._likeButton.addEventListener('click', (event) => {
+      // this.handleLike(this);
+      // console.log(this.isLiked()) false
+      // console.log(event) ok
+      console.log(`this.handleLikeClick(event) = ${this.handleLikeClick(event)}`)
+      this.handleLikeClick(event);
     });
     this._deleteButton.addEventListener('click', (event) => {
       this.handleDeleteClick(event);

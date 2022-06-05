@@ -14,8 +14,10 @@ import FormValidator from '../scripts/components/FormValidator.js';
 
 export const formElementEdit = document.querySelector('.popup__form_type_edit');
 export const formElementAdd = document.querySelector('.popup__form_type_add');
+const formAvatarUpdate = document.querySelector('.popup_type_edit-avatar');
 
 const editButton = document.querySelector('.profile__edit');
+const editAvatarButton = document.querySelector('.profile__edit-avatar');
 const addButton = document.querySelector('.profile__add');
 
 const nameInput = document.querySelector('.popup__input_type_name');
@@ -55,14 +57,33 @@ const userEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile', 
   handleSubmitForm: (profileData) => {
     userInfo.setUserInfo(profileData);
+    //render
     api.updateUserInfo(profileData);
+    //finally stop rendering
     userEditForm.close();
   }
 });
 
+const avatarEditForm = new PopupWithForm({
+  popupSelector: '.popup_type_edit-avatar',
+  handleSubmitForm: (link) => {
+    avatarEditForm.renderLoading(true);
+    api.updateUserAvatar(link)
+      .then((link) => {
+        userInfo.updateAvatar(link)
+      })
+      .finally(() => {
+        avatarEditForm.renderLoading(false);
+        avatarEditForm.close()})
+  }
+})
+
+console.log(avatarEditForm.handleSubmitForm)//undefined
+
 const photoPreview = new PopupWithImage('.popup_type_pic');
 
 const profileValidation = new FormValidator(validationConfig, formElementEdit);
+const avatarValidation = new FormValidator(validationConfig, formAvatarUpdate)
 const newPlaceValidation = new FormValidator(validationConfig, formElementAdd);
 
 const addPlaceForm = new PopupWithForm({
@@ -88,7 +109,27 @@ function createNewCard(item) {
   const newCard = new Card({
     data: item,
     handleCardClick: () => { handleCardClick(item) }, 
-    handleLikeClick: () => { },
+    handleLikeClick: (event) => {
+      // console.log('запускается handleLikeClick из индекс') //работает
+      const cardId = newCard.getCardId();
+      // console.log(`cardId = ${cardId}`) //работает
+      // console.log(`newCard.isLiked() = ${newCard.isLiked()}`) //работает
+      
+      if(newCard.isLiked()) {
+        // console.log(`newCard.isLiked() = ${newCard.isLiked()}`) //работает
+        
+        api.dislikeCard(cardId) //не работает
+          .then(()=> {newCard.toggleLike()})
+          .catch((err) => {
+            console.log(`Дизлайк не работает ${err}`)})
+      } else {
+        api.likeCard(cardId)
+        .then(()=> {newCard.toggleLike()})
+        .catch((err) => {
+          console.log(`Лайк не работает ${err}`)
+        // console.log(`else newCard.isLiked() = ${newCard.isLiked()}`)
+        })
+      }},
     handleDeleteClick: (event) => { 
       const cardId = newCard.getCardId();
       const cardElement = event.target.closest('.element');
@@ -115,11 +156,17 @@ function handleCardClick(card) {
 
 submitDeleteForm.setEventListeners();
 userEditForm.setEventListeners();
+avatarEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
 photoPreview.setEventListeners();
 
 profileValidation.enableValidation();
+avatarValidation.enableValidation();
 newPlaceValidation.enableValidation();
+
+editAvatarButton.addEventListener('click', () => {
+  avatarEditForm.open();
+})
 
 editButton.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
