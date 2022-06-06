@@ -1,4 +1,5 @@
 .profile {
+  position: relative;
   display: grid;
   grid-template-columns: 119px 326px 40px 1fr 150px;
   grid-template-areas:

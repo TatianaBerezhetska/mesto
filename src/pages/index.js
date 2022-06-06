@@ -35,8 +35,12 @@ const api = new Api({
   }
 });
 
-const userInfo = new UserInfo({});
-const cardList = new Section({ data: [], renderer: (item) => {
+const userInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  aboutSelector:'.profile__caption',
+  avatarSelector: '.profile__pic'
+});
+const cardList = new Section({ renderer: (item) => {
   const card = createNewCard(item);
   return card;
 }}, '.elements');
@@ -53,7 +57,9 @@ api.getAllData()
     
     cardList.renderItems(cardsArray);
   })
-  .then()
+  .catch((err) => {
+    console.log(`Ошибка при запросе данных с сервера ${err}`);
+  })
 
 const userEditForm = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile', 
@@ -61,11 +67,15 @@ const userEditForm = new PopupWithForm({
     userEditForm.renderLoading(true);
     api.updateUserInfo(profileData)
       .then((profileData) => {
-        userInfo.setInitialInfo(profileData)
+        userInfo.setInitialInfo(profileData);
+        userInfo.setUserInfo(profileData);
+        userEditForm.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка обновления данных пользователя ${err}`);
       })
       .finally(() => {
         userEditForm.renderLoading(false);
-        userEditForm.close();
       })
   }
 });
@@ -76,11 +86,15 @@ const avatarEditForm = new PopupWithForm({
     avatarEditForm.renderLoading(true);
     api.updateUserAvatar(url)
       .then((link) => {
-        userInfo.updateAvatar(link)
+        userInfo.updateAvatar(link);
+        avatarEditForm.close()
+      })
+      .catch((err) => {
+        console.log(`Ошибка обновления фото провиля пользователя ${err}`);
       })
       .finally(() => {
         avatarEditForm.renderLoading(false);
-        avatarEditForm.close()})
+      })
   }
 })
 
@@ -101,16 +115,20 @@ const addPlaceForm = new PopupWithForm({
       .then((cardData) => {
         const newCard = createNewCard(cardData, cardData._id);
         cardList.addItem(newCard);
+        addPlaceForm.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка добавления места ${err}`);
       })
       .finally(() => {
         addPlaceForm.renderLoading(false);
-        newPlaceValidation.disableButton();
-        addPlaceForm.close();
       })    
-  }});
+  }, });
 
 const submitDeleteForm = new PopupWithSubmit({
-  popupSelector: '.popup_type_submit-action'});
+  popupSelector: '.popup_type_submit-action'
+    
+  });
 
 function createNewCard(item) {
   const newCard = new Card({
@@ -136,13 +154,12 @@ function createNewCard(item) {
           console.log(`Лайк не работает ${err}`)
         })
       }},
-    handleDeleteClick: (event) => { 
+    handleDeleteClick: (item) => { 
       const cardId = newCard.getCardId();
-      const cardElement = event.target.closest('.element');
       submitDeleteForm.setSubmitHandler(() => {
         api.deleteCard(cardId)
           .then(() => {
-            cardElement.remove();
+            newCard.removeCard();
             submitDeleteForm.close();
           })
           .catch((err) => {
@@ -151,7 +168,7 @@ function createNewCard(item) {
       })
       submitDeleteForm.open();
     }
-  }, '.element-template', userInfo.getUserInfo().id);
+  }, '.element-template', userId);
     const element = newCard.createCard();
     return element;
 };
@@ -166,11 +183,9 @@ avatarEditForm.setEventListeners();
 addPlaceForm.setEventListeners();
 photoPreview.setEventListeners();
 
-profileValidation.enableValidation();
-avatarValidation.enableValidation();
-newPlaceValidation.enableValidation();
-
 editAvatarButton.addEventListener('click', () => {
+  avatarValidation.disableButton();
+  avatarValidation.enableValidation();
   avatarEditForm.open();
 })
 
@@ -178,6 +193,10 @@ editButton.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.name;
   jobInput.value = userData.job;
+  profileValidation.enableValidation();
   userEditForm.open()});
 
-addButton.addEventListener('click', () => {addPlaceForm.open()});
+addButton.addEventListener('click', () => {
+  newPlaceValidation.disableButton();
+  newPlaceValidation.enableValidation();
+  addPlaceForm.open()});

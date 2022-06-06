@@ -14,9 +14,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Данные пользователя не получены: ${err}`);
-    });
   }
 
   getCards() {
@@ -28,9 +25,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Массив карточек не получен: ${err}`);
-    });
   }
 
   getAllData() {
@@ -51,9 +45,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка обновления аватара: ${err}`);
-    });
   }
 
   updateUserAvatar(res) {
@@ -69,9 +60,6 @@ export default class Api {
           return Promise.resolve(res.json());
         }
       })
-      .catch((err) => {
-        console.log(`Ошибка обновления аватара: ${err}`);
-      });
   }
 
   postNewCard(newCard) {
@@ -88,9 +76,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка добавления новой карточки: ${err}`);
-    });
   }
 
   deleteCard(cardId) {
@@ -106,9 +91,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка удаления карточки: ${err}`);
-    });
   }
 
   likeCard(cardId) {
@@ -124,9 +106,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка лайка карточки: ${err}`);
-    });
   }
 
   dislikeCard(cardId) {
@@ -142,9 +121,6 @@ export default class Api {
         return Promise.resolve(res.json());
       }
     })
-    .catch((err) => {
-      console.log(`Ошибка дизлайка карточки: ${err}`);
-    });
   }
 
 }
