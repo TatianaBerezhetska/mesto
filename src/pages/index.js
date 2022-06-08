@@ -126,8 +126,17 @@ const addPlaceForm = new PopupWithForm({
   }, });
 
 const submitDeleteForm = new PopupWithSubmit({
-  popupSelector: '.popup_type_submit-action'
-    
+  popupSelector: '.popup_type_submit-action',
+  handleSubmitForm: (newCard) => {
+    submitDeleteForm.setSubmitHandler(newCard);
+    api.deleteCard(newCard.getCardId())
+        .then(() => {
+          newCard.removeCard();
+          submitDeleteForm.close();
+        })
+        .catch((err) => {
+          console.log(`Ошибка при удалении карточки ${err}`)
+        })}
   });
 
 function createNewCard(item) {
@@ -154,18 +163,8 @@ function createNewCard(item) {
           console.log(`Лайк не работает ${err}`)
         })
       }},
-    handleDeleteClick: (item) => { 
-      const cardId = newCard.getCardId();
-      submitDeleteForm.setSubmitHandler(() => {
-        api.deleteCard(cardId)
-          .then(() => {
-            newCard.removeCard();
-            submitDeleteForm.close();
-          })
-          .catch((err) => {
-            console.log(`Ошибка при удалении карточки ${err}`)
-          })
-      })
+    handleDeleteClick: () => { 
+      submitDeleteForm.setSubmitHandler(newCard);
       submitDeleteForm.open();
     }
   }, '.element-template', userId);
