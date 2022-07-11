@@ -3,8 +3,9 @@
 .body{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;text-rendering:optimizeLegibility;background-color:#000;color:#fff;font-family:Inter,Arial,Helvetica,sans-serif;margin:0 auto;max-width:1280px;min-height:500px;min-width:320px;padding:0 auto}
 .header{border-bottom:1px solid rgba(84,84,84,.7);margin:45px 200px 0;max-width:880px;padding:0}@media screen and (max-width:900px){.header{margin:0;max-width:100%;padding:28px 27px 0}}
 .logo{margin:0 0 41px;max-width:142px;padding:0}@media screen and (max-width:320px){.logo{margin:0 0 32px;max-width:104px}}
-.profile{align-items:center;display:grid;grid-template-areas:"pic name edit . add" "pic info info . add";grid-template-columns:119px 326px 40px 1fr 150px;justify-items:start;margin:37px auto 48px;max-width:880px;padding:0}@media screen and (max-width:1024px){.profile{grid-template-areas:"pic pic" "name edit" "info info" "add add";grid-template-columns:1fr 60px;grid-template-rows:128px 49px 28px 115px;margin-bottom:0;max-width:320px}}
+.profile{align-items:center;display:grid;grid-template-areas:"pic name edit . add" "pic info info . add";grid-template-columns:119px 326px 40px 1fr 150px;justify-items:start;margin:37px auto 48px;max-width:880px;padding:0;position:relative}@media screen and (max-width:1024px){.profile{grid-template-areas:"pic pic" "name edit" "info info" "add add";grid-template-columns:1fr 60px;grid-template-rows:128px 49px 28px 115px;margin-bottom:0;max-width:320px}}
 .profile__pic{border-radius:50%;grid-area:pic;height:119px;justify-self:center;margin:0;-o-object-fit:cover;object-fit:cover;padding:0;width:119px}
+.profile__edit-avatar{background-color:transparent;border:none;border-radius:50%;cursor:url(a086f758840ae814ecde.svg) 0 0,pointer;height:120px;margin:0 auto;position:absolute;width:120px}.profile__edit-avatar:hover{background-color:rgba(0,0,0,.8)}@media screen and (max-width:1024px){.profile__edit-avatar{left:30%;top:0}}
 .profile__name{align-self:end;font-size:42px;font-weight:500;grid-area:name;line-height:1.14;margin:0 0 0 32px;max-width:294px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1024px){.profile__name{font-size:27px;justify-self:end;line-height:1.22;margin:0 5px 0 0;max-width:189px}}
 .profile__caption{align-self:start;font-size:18px;font-weight:400;grid-area:info;line-height:1.22;margin:0 0 0 32px;max-width:336px;overflow:hidden;padding:0;text-overflow:ellipsis;white-space:nowrap}@media screen and (max-width:1024px){.profile__caption{align-self:end;font-size:14px;justify-self:center;line-height:1.21;margin:0;max-width:282px}}
 .profile__edit{align-self:end;background:transparent;background-image:url(f66e917d7fb212913c9e.svg);background-position:50%;background-repeat:no-repeat;background-size:cover;border:none;box-sizing:content-box;grid-area:edit;height:24px;justify-self:end;margin:0 0 10px;-o-object-fit:contain;object-fit:contain;padding:0;transition:opacity .1s ease-in;width:24px}.profile__edit:hover{cursor:pointer;opacity:.6}@media screen and (max-width:1024px){.profile__edit{height:18px;justify-self:start;margin:0 0 5px 5px;width:18px}}
@@ -17,14 +18,16 @@
 .element__description{color:#000;font-size:24px;font-weight:900;line-height:1.21;max-width:215px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .element__like-button{background:transparent;background-image:url(1ad06e85f169668a1f36.svg);border:none;height:19px;margin:0;padding:0;transition:opacity .1s ease-in;width:22px}.element__like-button:hover{cursor:pointer;opacity:.5}
 .element__like-button_active{background-image:url(35948469632d0421d697.svg)}
-.element__delete-button{background:transparent;background-image:url(e3c42771bff3aaa52f76.svg);border:none;height:19px;margin:0;padding:0;position:absolute;right:20px;top:20px;transition:opacity .1s ease-in;width:18px;z-index:99}.element__delete-button:hover{cursor:pointer;opacity:.6}
+.element__like-count{color:#000;font-size:13px;line-height:1.21;margin:0;padding:0;text-align:center}
+.element__delete-button{background:transparent;background-image:url(e3c42771bff3aaa52f76.svg);border:none;height:19px;margin:0;padding:0;position:absolute;right:20px;top:20px;transition:opacity .1s ease-in;visibility:visible;width:18px;z-index:99}.element__delete-button:hover{cursor:pointer;opacity:.6}
+.element__delete-button_invisible{visibility:hidden}
 .footer{margin:57px 200px;padding:0}@media screen and (max-width:720px){.footer{margin:38px 19px}}
 .footer__text{color:#545454;font-size:18px;line-height:1.22;margin:0;padding:0}@media screen and (max-width:720px){.footer__text{font-size:14px;line-height:1.21}}
 .popup{background-color:rgba(0,0,0,.5);bottom:0;left:0;opacity:0;position:fixed;right:0;top:0;transition:visibility .3s,opacity .5s ease-in-out;visibility:hidden;z-index:999}
 .popup_dark-bg{background-color:rgba(0,0,0,.9)}
-.popup_opened{display:flex;opacity:1;visibility:visible}
-.popup__container{align-items:center;display:flex;flex-direction:column;justify-content:center;margin:auto;position:relative}
-.popup__form{background-color:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);height:330px;margin:auto;width:430px}@media screen and (max-width:555px){.popup__form{width:282px}}
+.popup_opened{opacity:1;visibility:visible}
+.popup__container{align-items:center;display:flex;flex-direction:column;justify-content:center;margin:auto;min-height:100vh}
+.popup__form{background-color:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);margin:auto;max-height:330px;position:relative;width:430px}@media screen and (max-width:555px){.popup__form{width:282px}}
 .popup__heading{color:#000;font-size:24px;font-weight:900;line-height:1.22;margin:36px 34px 54px;padding:0}@media screen and (max-width:555px){.popup__heading{font-size:18px;line-height:1.21;margin:25px 22px 75px}}
 .popup__input{border:0;border-bottom:1px solid rgba(0,0,0,.2);color:#000;font-family:inherit;font-size:14px;font-weight:400;line-height:1.2;margin:0 36px;padding:0;width:358px}@media screen and (max-width:555px){.popup__input{margin:0 22px;width:238px}.popup__input:last-of-type{margin-bottom:0}}
 .popup__input_type_error{border-bottom:1px solid red}
