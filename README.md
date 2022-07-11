@@ -30,4 +30,4 @@
 * перенести сайт на React.
 
 Выполнено Татьяной Бережецкой
-**Ссылка на проект**: [Место](https://tatianaberezhetska.github.io/mesto)
+**Ссылка на проект**: [Место](https://tatianaberezhetska.github.io/mesto) или здесь: https://mesto-k7m3dzrvx-tatianaberezhetska.vercel.app/
